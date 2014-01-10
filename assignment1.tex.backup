@@ -1,0 +1,84 @@
+\documentclass[pdftex,a4paper,12pt]{report}
+
+\usepackage{algorithm2e}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\LARGE IIT Kanpur}\\[1.5cm]
+
+\textsc{\Large CS345A - AlgorithmsII}\\[0.5cm]
+
+% Title
+{ \huge \bfseries Assignment 1 \\[0.4cm] }
+
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Anjani Kumar\\
+11101
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+Sumedh Masulkar\\
+11736
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large January 12, 2014}
+
+\end{center}
+\end{titlepage}
+
+\section {Non Dominated Points}
+\subsection {$\Theta$(n log n) algorithm for non-dominated points in a plane.}
+
+\paragraph{Overview of algorithm} 
+Given set of points $P$ in a plane. \\
+Divide Step:
+\begin{enumerate}
+\item
+If there is only one point in a plane, the point itself is non-dominated set of points. Hence, return $P$.
+\item
+If there are two points, if any point has both x and y co-ordinates both greater than that of other point, then return that point, else return $P$.
+\item
+Else find the x-median of the points and divide the plane into left half plane and right half plane using the median. And now call the function for both the half planes.\\
+\end{enumerate}
+Conquer Step:\\
+Goal: Given the non-dominated points of the two half planes, merge the solution of smaller parts to get the solution of the bigger plane.\\\\
+Assuming we have two sets of points $P_1$ and $P_2$, where $P_1$ is the set of non-dominated points of the left plane, and $P_2$ is the set of non-dominated points of the right plane respectively. \\\\
+The x-coordinate of all the points in right plane are obviously greater than x-coordinate of all the points in the left plane. Thus, we only need to eliminate points from $P_1$ that are dominated by points in $P_2$.\\
+Since x-coordinate of points in $P_2$ is always greater, we only need to look for the y-coordinates.\\
+Let y be the point in $P_2$ with maximum y-coordinate. Then the dominated points in $P_1$ are all the points whose y-coordinates are less than y-coordinate of y.\\
+Thus the solution of the plane will be \{ $P_1$ - \{points in $P_1$ with y-coordinate $<$ y \} \} $\cup P_2$. \\
+
+\pagebreak
+
+\paragraph{Pseudo-Code.} \mbox{} \\\\
+\begin{algorithm}
+
+NonDominatedPts(set of points P)\{
+    //Returns set of non dominated points from $P$.
+
+      \eIf{$\mid$P$\mid$==1} {return P\;}
+      {$\mid$P$\mid$==2}{
+	    let $p_1$ and $p_2$ be the two points in P;
+	    \eIf {$x_1 > x_2$ and $y_1 > y_2$}{ return \{$p_1$\};	\qquad	//$p_1$=($x_1$,$y_1$), and $p_2$=($x_2$,$y_2$)}
+	    {$x_1 < x_2$ and $y_1 < y_2$} {return \{$p_2$\}\;}   
+	    {return P;}
+      }{
+	    p* \gets x-median(P)\;
+	    (L,R) \gets split(P, p*)\;
+	    $P_1$ \gets NonDominatedPts(L)\;
+	    $P_2$ \gets NonDominatedPts(R)\;
+      }
+\caption{Algorithm to find Non Dominated Points}
+\end{algorithm}
+
+\end{document}
