@@ -1,0 +1,31 @@
+\contentsline {section}{\numberline {1}Non Dominated Points}{2}{section.0.1}
+\contentsline {subsection}{\numberline {1.1}\textbf {$O(n logn)$} algorithm for non-dominated points in a plane.}{2}{subsection.0.1.1}
+\contentsline {paragraph}{Overview of algorithm}{2}{section*.2}
+\contentsline {paragraph}{Pseudo-Code.}{3}{section*.3}
+\contentsline {paragraph}{Time Complexity:}{3}{section*.4}
+\contentsline {paragraph}{Proof of Correctness:}{4}{section*.5}
+\contentsline {subsection}{\numberline {1.2}\textbf {$O(n logh)$} algorithm for non-dominated points in a plane}{5}{subsection.0.1.2}
+\contentsline {paragraph}{Idea}{5}{section*.6}
+\contentsline {paragraph}{Time Complexity Analysis:}{5}{section*.7}
+\contentsline {paragraph}{Pseudo-Code.}{6}{section*.8}
+\contentsline {subsection}{\numberline {1.3}\textbf {$O(i logi)$} algorithm to maintain non-dominated points in online fashion}{7}{subsection.0.1.3}
+\contentsline {paragraph}{Introduction:}{7}{section*.9}
+\contentsline {paragraph}{Functions used:}{7}{section*.10}
+\contentsline {paragraph}{Idea (What We are trying to do?)}{7}{section*.11}
+\contentsline {paragraph}{Time Complexity:}{8}{section*.12}
+\contentsline {paragraph}{Pseudo Code}{9}{section*.13}
+\contentsline {paragraph}{Example}{10}{section*.14}
+\contentsline {paragraph}{Case 1:}{10}{section*.15}
+\contentsline {paragraph}{Case 2:}{10}{section*.16}
+\contentsline {subsection}{\numberline {1.4}Non Dominated Points in a 3D plane}{11}{subsection.0.1.4}
+\contentsline {paragraph}{Introduction:}{11}{section*.17}
+\contentsline {paragraph}{Functions used:}{11}{section*.18}
+\contentsline {paragraph}{Idea(what we are trying to do:)}{11}{section*.19}
+\contentsline {paragraph}{Time complexity:}{11}{section*.20}
+\contentsline {paragraph}{Pseudo Code:}{12}{section*.21}
+\contentsline {section}{\numberline {2}A computational problem of experimental physicist}{13}{section.0.2}
+\contentsline {paragraph}{Observation:}{14}{section*.22}
+\contentsline {paragraph}{Points to note:}{14}{section*.23}
+\contentsline {paragraph}{Proof of correctness:}{14}{section*.24}
+\contentsline {paragraph}{Pseudo Code}{15}{section*.25}
+\contentsline {paragraph}{Time Complexity:}{15}{section*.26}
