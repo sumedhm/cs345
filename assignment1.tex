@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage{fullpage}
 \usepackage{graphicx}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -131,11 +132,12 @@ Proof by induction on size of set P.
 
 \subsection {\textbf{$O(n logh)$} algorithm for non-dominated points in a plane}
 \paragraph{Idea} \makebox[2pt]{}\\
+
 The solution to this problem is similar to that of algorithm \ref{alg}, with a slight modification.
 Here, we are removing the dominated group of points from $P_1$ (see fig. \ref{fig}), before we find non-dominated points of $P_1$,
 hence reducing the number of points NonDominatedPts($P_1$) returns($h_1$), in the following analysis. 
 
-\paragraph{Time Complexity Analysis:}\makebox[2pt]{}\\\\..
+\paragraph{Time Complexity Analysis:}\makebox[2pt]{}\\\\
 $T(n,h)$ = $an$ + $T(n/2,h_1)$ + $T(n/2,h_2)$ 		\textcolor{blue}{//$h_1+h_2$ = h}\\
 \textbf{Induction Hypothesis:} $T(n_o, h_o)$ $\leq$ c$n_o$ log $h_o$ + b. (for some $n_o < n$) \\\\
 \textbf{Induction Step:} $T(n, h)$ $\leq$ a$n$ + c$(\frac{n}{2})$ log($h_1$) + c$(\frac{n}{2})$ log($h_2$) + 2b. \\\\
@@ -147,7 +149,28 @@ Using AM $\geq$ GM, $h_1*h_2$ $\leq$ $(\frac{h}{2})^2$.\\\\
 \makebox[80pt]{} $T(n,h) \leq cn^*log(h) + b.$\\\\
 
 Therefore, $T(n,h)$ = $O(n log(h))$.
+\newpage
+\paragraph{Proof of Correctness:} \makebox[2pt]{}\\
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{p2.png}
+\caption{Figure for non-dominated pts}
+\label{figp2}
+\end{figure}
 
+Proof by induction on size of set P.
+\begin{itemize}
+ \item If($\mid$P$\mid$=1), the point is non-dominated, hence the set P should be returned.
+ \item If($\mid$P$\mid$=2), Remove dominanted point if exists, and return P.
+ \item \textbf{Induction Hypothesis: } 
+ As shown in figure, the points in $P_2$ have x-coordinate of any point is greater than x-coordinate of any point in $P_1$.\\
+ See figure(\ref{figp2}).\\
+ If p* is the point with maximum y-coordinate in $P_2$, any point in $P_1$ which has y-coordinate greater than that of p* can be dominated by the point
+  p*.\\
+ Thus, the group of points in $P_1$ that have y-coordinate less than that of p* are dominated, hence need to be removed.\\
+ Hence, we need to remove this group of points from $P_1$ and solution of $P_1$ $ \cup$ solution of $P_2$ will be the answer.\\
+ Thus, the algorithm is correct.
+\end{itemize}
 \newpage
 
 \paragraph{Pseudo-Code.} \mbox{} \\
@@ -190,12 +213,16 @@ that stores the predecessor of the node in the tree $T$($i.e.$ the node which ha
  \item
  Insert($p_{new}$, T): It is used to insert $p_{new}$ in BST tree $T$ such that T remains height balanced.
  \item 
-  FindSuccessor(): Used to find the successor of the point before it is inserted into BST T. \\
+  FindSuccessor(T, $p_{new}$): Used to find the successor of the point before it is inserted into BST T.
+  \item
+ Delete(T, $p$): Delete point p from tree T.\\
 \makebox[40pt]{}We will just need to follow the path where the point will be inserted, initialise successor to null, 
 whenever we move right from a node, this cannot be the successor,
 so ignore this node. Whenever we move to left of a node, this can be a possible successor, hence update successor. When we reach the
 position where this new node will be inserted, the value of successor is returned. \\
 \textbf{Time Complexity:} $\textbf{O(log i)}$.
+\item
+FindMax(): Keep traversing to the right, till right of the node is null, this node will be the maximum of the tree.
 \end{enumerate}
 \paragraph{Idea (What We are trying to do?)} \makebox[2pt]{}
 \begin{itemize}
@@ -215,31 +242,36 @@ position where this new node will be inserted, the value of successor is returne
 \end{itemize}
 
 \paragraph{Time Complexity:} \textbf{$O(i logi)$}.\\
-At each insertion of points into the graph, points will be either inserted or deleted from the tree which takes \textbf{$O(logi)$} time,
-Therefore overall time complexity for i steps of insertion is \textbf{$O(i logi)$}.
+At each insertion of points into the graph, points will be either inserted or deleted from the tree which takes
+$O(log k)$ time, where k$\leq$ i is the number of elements in the tree T.\\
+Therefore overall time complexity for I steps of insertion is $O(i log i)$.
 
 \newpage
-\paragraph{Pseudo Code}\makebox[2pt]{}\\
 \begin{algorithm}
-AddNewPoint($p_{new}$, T)\{\\
+\paragraph{Pseudo Code:}\makebox[2pt]{}\\
+\makebox[2pt]{}\\AddNewPoint($p_{new}$, T)\{\\
 \Begin{
 
   \eIf{T== \textcolor{red}{NULL} }{
  	Insert($p_{new}$,T)\;
  	$p_{new}\rightarrow$predecessor = \textcolor{red}{NULL}\;
   }{
-       successor = FindSuccessor($p_{new}$)\;
-      \eIf{successor$<>$ \textcolor{red}{NULL} and successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
+       successor = FindSuccessor(T, $p_{new}$)\;
+       \uIf{successor == \textcolor{red}{NULL}}{
+	    $p_{new}\rightarrow$predecessor = FindMax()\;
+       }
+      \uElseIf{successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
 	Insert($p_{new}$, T)\;
  	temp1 = successor$\rightarrow$predecessor\;
  	successor$\rightarrow$predecessor = $p_{new}$\;
  	\While {temp1 $<>$ \textcolor{red}{NULL} and temp1$\rightarrow$ y $<$ $p_{new}\rightarrow$y}{
 	  temp2 = temp1$\rightarrow$predecessor\;
- 	  Delete temp1\;
+ 	  Delete(T, temp1)\;
  	  temp1 = temp2\;
  	}
  	P$\rightarrow$predecessor = temp1\;
-      }{
+      }
+      \uElse{
 	  \textcolor{blue}{//Ignore $p_{new}$.}\\
       }
     }\makebox[2pt]{}\\
@@ -249,7 +281,7 @@ AddNewPoint($p_{new}$, T)\{\\
 \label{algo}
 \end{algorithm}
 \newpage
-\paragraph{Example} \makebox[2pt]{}\\
+\paragraph{Proof of Correctness:} \makebox[2pt]{}\\
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=100mm]{p11.png}
@@ -279,54 +311,119 @@ Data Structure used: Height Balanced Binary Search Tree(T).
 \paragraph{Functions used:}
 \begin{enumerate}
  \item 
- FindSuccessor($p_{new}$): Used to find the successor of the point before it is inserted into BST T.(Same as that in 1(c).)
+ FindSuccessor(T, $p_{new}$): Used to find the successor of the point before it is inserted into BST T.(Same as that in 1(c).)
+\item
+FindMax(): Keep traversing to the right, till right of the node is null, this node will be the maximum of the tree.
  \item
  Insert($p_{new}$,T): It is used to insert a node into tree T such that it remains balanced.
  \item
- Both these functions take O(log n) time, where n is the size of tree T. 
+ Delete(T, $p$): Delete point p from tree T.
+ \item
+ All these functions take O(log n) time, where n is the size of tree T. 
 \end{enumerate}
 Note here only the left and right child pointer in the nodes of T need to be stored. Predecessor pointer
 is not needed.
 \paragraph{Idea(what we are trying to do:)}
 \begin{itemize}
  \item 
-We look at the 3D plane from a particular axis(z) $i.e.$ the points are first sorted according to decreasing order of their z-coordinates.
+We look at the 3D plane from a particular axis (z) i.e. the points are first sorted according to decreasing order of their z coordinates.
 \item
-The ND Points are stored in tree T according to increasing order of their x-coordinate.
+The outermost ND Points are stored in tree T according to increasing order of their x coordinate and the remaining ND Points are stored in a separate array.
 \item
-As we move from the top of the z axis, the point $p_{new}$’s successor(in the tree T) is computed and its y-coordinate is compared with $p_{new}$.
+As we move from the top of the z axis, the point P’s successor (in the tree T) is computed and its y coordinate is compared with P.
 \item
-This is the only comparison test and the previously computed ND Points are not deleted 
-because their z-coordinate is already higher compared to the new points being checked.
+Subsequently, if the point P passes the comparison test with its successor (temp), all other ND Points above temp are compared with P. If their y coordinate is less than P then they
+are removed from the tree and inserted into an array (Points which are also Non Dominated) because their z coordinate is large compared to P.
+\item
+The test stops when we reach the top of the ND staircase or a ND Point above P has high Y coordinate compared to point P.
 \end{itemize}
 
 \paragraph{Time complexity:}
-In this algorithm, a point insertion, deletion and successor function takes logarithmic time.\\
-Also sorting aross z axis also takes $\textbf{O(n log n)} $ time. Therefore the overall time complexity would be $\textbf{O(n log n)}$.
-\newpage
+\begin{itemize}
+ \item 
+Sorting according to z coordinate takes $O(n log n)$ time.
+\item
+Inserting into array take $O(1)$ time.
+\item
+Deleting from tree takes $O(log n)$ time, if all nodes are deleted at the same time, it will take $O(n logn)$.
+\end{itemize}
 
-\paragraph{Pseudo Code:} \makebox[2pt]{}\\
-BuildNonDominatedPtsTree()\{
+Hence the overall time complexity remains $O(n log n)$ for n points in the plane.
+
 \begin{algorithm}
+\paragraph{Pseudo Code:}\makebox[2pt]{}\\
+\makebox[2pt]{}\\
+BuildNonDominatedPtsTree($P$)\{\\
 \Begin{
-    Sort points according to decreasing order of z coordinates.\makebox[40pt]{}\textcolor{blue}{//$O(n log n)$.} \\
-    \For{$p_{new} \leftarrow p_1$ \KwTo $p_n$}{
-    \makebox[100pt]{}\textcolor{blue}{//$O(n log n)$.}\\
-     \eIf{T==\textcolor{red}{NULL}}{
-	Insert($p_{new}$,T)\;
-     }{
-	successor = FindSuccessor($p_{new}$)\;
-	\eIf{successor $<>$ \textcolor{red}{NULL} and successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
-	  Insert($p_{new}$,T)\;	
-	}{
+  Sort points according to decreasing order of z-coordinate.\\
+  Array Points[]\;
+  \eIf{T== \textcolor{red}{NULL} }{
+ 	Insert($p_{new}$,T)\;
+ 	$p_{new}\rightarrow$predecessor = \textcolor{red}{NULL}\;
+  }{
+       successor = FindSuccessor(T, $p_{new}$)\;
+       \uIf{successor == \textcolor{red}{NULL}}{
+	  Insert($p_{new}$,T)\;
+	  $p_{new}\rightarrow$predecessor = FindMax()\;
+       }
+      \uElseIf{successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
+	Insert($p_{new}$, T)\;
+ 	temp1 = successor$\rightarrow$predecessor\;
+ 	successor$\rightarrow$predecessor = $p_{new}$\;
+ 	\While {temp1 $<>$ \textcolor{red}{NULL} and temp1$\rightarrow$ y $<$ $p_{new}\rightarrow$y}{
+	  temp2 = temp1$\rightarrow$predecessor\;
+	  Points.add(temp1)\;
+ 	  Delete(T, temp1)\;
+ 	  temp1 = temp2\;
+ 	}
+ 	P$\rightarrow$predecessor = temp1\;
+      }
+      \uElse{
 	  \textcolor{blue}{//Ignore $p_{new}$.}\\
-	}
-     }
-    }
-}\makebox[2pt]{}\\
+      }
+    }\makebox[2pt]{}\\
+    return $T$\;
+}
+\} \makebox[2pt]{}\\
+ReportNonDominatedPoints(P)\{\\
+\Begin{
+    T = BuildNonDominatedPtsTree($P$)\;
+    Output $T \cup Points[ ]$\;
+}
 \}\\
-\caption{$\textbf{O(n log n)}$Algorithm to find Non Dominated Points in 3D plane.}
+\caption{$\textbf{O(n log n)}$Finding Non Dominated Points in 3D plane.}
 \end{algorithm}
+\newpage
+\paragraph{Proof of Correctness:} \makebox[2pt]{}\\
+We have sorted the points in the decreasing order of z-coordinate and started seeing the points from the top of Z-axis.\\
+\begin{itemize}
+ \item 
+ Base case: When the first point P is inserted, its successor in T(which is maintained according to increasing order of x- coordinate) is NULL, therefore, it is inserted T. 
+The base case is obviously correct as this is the only point and hence has to be Non Dominated.
+\item Induction Hypothesis: We assume that before we move upto I points, the tree T and array (Points)
+contains the non-dominated points.
+ \item Induction Step: We  need to show that this  algorithm works correctly for the $i^{th}$ point (P). Following cases are possible:
+ \begin{itemize}
+  \item 
+  If the successor of point P in T is found out to be NULL, then it implies
+that the x-coordinate of P is more than all the ND points stored  in T. Therefore,
+P is inserted into T as no other point is dominating it.
+Also, all the points above P in the staircase formation (Predecessor of P in T) with y-coordinates less than that of P are moved from T to be stored separately in the array (Points).
+since their z-coordinates are higher than that of P they are also a set of Non-dominating points.
+ \item If the successor  of ith point in T is found out not to be NULL, then following cases can occur:
+ \begin{itemize}
+  \item If the y-coordinate of successor is greater than that of P, then this point is clearly dominated by the successor because P’s x,y and z coordinates are smaller than that of its successor.
+Hence point P is not inserted in the tree T.
+ \item If the y-coordinate of successor is less than that of P, then no point in T dominates P and hence the point P is inserted in T and all the prede-
+cessor of P in T with y-coordinates smaller than that of P is moved from T to array (Points)
+to maintain the stair-case but stored separately as described in case1.
+ \end{itemize}
+ 
+ \end{itemize}
+From the induction step, it is clear that we are correctly updating the tree T to contain the set of
+ND points according to the most recently processed point.
+
+ \end{itemize}
 \newpage
 \section{A computational problem of experimental physicist}
 

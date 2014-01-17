@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage{fullpage}
 \usepackage{graphicx}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -137,13 +138,15 @@ hence reducing the number of points NonDominatedPts($P_1$) returns($h_1$), in th
 
 \paragraph{Time Complexity Analysis:}\makebox[2pt]{}\\\\..
 $T(n,h)$ = $an$ + $T(n/2,h_1)$ + $T(n/2,h_2)$ 		\textcolor{blue}{//$h_1+h_2$ = h}\\
-\textbf{Induction Hypothesis:} $T(n_o, h_o)$ $\leq$ c$n_o$ log $h_o$ + b. \\\\
+\textbf{Induction Hypothesis:} $T(n_o, h_o)$ $\leq$ c$n_o$ log $h_o$ + b. (for some $n_o < n$) \\\\
 \textbf{Induction Step:} $T(n, h)$ $\leq$ a$n$ + c$(\frac{n}{2})$ log($h_1$) + c$(\frac{n}{2})$ log($h_2$) + 2b. \\\\
-\makebox[40pt]{}=
-\paragraph{RHS} = $(\frac{n}{2})(log(h_1))$ + $(\frac{n}{2})(log(h_2))$ \\\\
- \makebox[40pt]{}= $(\frac{n}{2})(log(h1 * h2))$\\\\
- \makebox[40pt]{}$\leq$ $n * log(h)$		\textcolor{blue}{//$h_1<$=n and $h_2<$=n}\\\\
- 
+\makebox[100pt]{} $\leq$ a$n$ + c$(\frac{n}{2})$ log($h_1 * h_2$) + 2b.\\\\
+Using AM $\geq$ GM, $h_1*h_2$ $\leq$ $(\frac{h}{2})^2$.\\\\
+\makebox[80pt]{} $T(n,h) \leq An + cn^*log(\frac{h}{2}) + 2b$ \\\\
+\makebox[80pt]{} $\leq(cn^*logn + b) + (an + b - cn^*log2)$\\
+\makebox[200pt]{} $(\leq 0$ for some c $>$ a+b)\\\\
+\makebox[80pt]{} $T(n,h) \leq cn^*log(h) + b.$\\\\
+
 Therefore, $T(n,h)$ = $O(n log(h))$.
 
 \newpage
@@ -217,9 +220,9 @@ At each insertion of points into the graph, points will be either inserted or de
 Therefore overall time complexity for i steps of insertion is \textbf{$O(i logi)$}.
 
 \newpage
-\paragraph{Pseudo Code}\makebox[2pt]{}\\
 \begin{algorithm}
-AddNewPoint($p_{new}$, T)\{\\
+\paragraph{Pseudo Code:}\makebox[2pt]{}\\
+\makebox[2pt]{}\\AddNewPoint($p_{new}$, T)\{\\
 \Begin{
 
   \eIf{T== \textcolor{red}{NULL} }{
@@ -227,7 +230,10 @@ AddNewPoint($p_{new}$, T)\{\\
  	$p_{new}\rightarrow$predecessor = \textcolor{red}{NULL}\;
   }{
        successor = FindSuccessor($p_{new}$)\;
-      \eIf{successor$<>$ \textcolor{red}{NULL} and successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
+       \uIf{successor == \textcolor{red}{NULL}}{
+	    $p_{new}\rightarrow$predecessor = FindMax()\;
+       }
+      \uElseIf{successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
 	Insert($p_{new}$, T)\;
  	temp1 = successor$\rightarrow$predecessor\;
  	successor$\rightarrow$predecessor = $p_{new}$\;
@@ -237,7 +243,8 @@ AddNewPoint($p_{new}$, T)\{\\
  	  temp1 = temp2\;
  	}
  	P$\rightarrow$predecessor = temp1\;
-      }{
+      }
+      \uElse{
 	  \textcolor{blue}{//Ignore $p_{new}$.}\\
       }
     }\makebox[2pt]{}\\
@@ -301,30 +308,51 @@ because their z-coordinate is already higher compared to the new points being ch
 \paragraph{Time complexity:}
 In this algorithm, a point insertion, deletion and successor function takes logarithmic time.\\
 Also sorting aross z axis also takes $\textbf{O(n log n)} $ time. Therefore the overall time complexity would be $\textbf{O(n log n)}$.
-\newpage
 
-\paragraph{Pseudo Code:} \makebox[2pt]{}\\
-BuildNonDominatedPtsTree()\{
 \begin{algorithm}
+\paragraph{Pseudo Code:}\makebox[2pt]{}\\
+\makebox[2pt]{}\\
+BuildNonDominatedPtsTree($P$)\{\\
 \Begin{
-    Sort points according to decreasing order of z coordinates.\makebox[40pt]{}\textcolor{blue}{//$O(n log n)$.} \\
-    \For{$p_{new} \leftarrow p_1$ \KwTo $p_n$}{
-    \makebox[100pt]{}\textcolor{blue}{//$O(n log n)$.}\\
-     \eIf{T==\textcolor{red}{NULL}}{
-	Insert($p_{new}$,T)\;
-     }{
-	successor = FindSuccessor($p_{new}$)\;
-	\eIf{successor $<>$ \textcolor{red}{NULL} and successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
-	  Insert($p_{new}$,T)\;	
-	}{
+  Sort points according to decreasing order of z-coordinate.\\
+  Array Points[]\;
+  \eIf{T== \textcolor{red}{NULL} }{
+ 	Insert($p_{new}$,T)\;
+ 	$p_{new}\rightarrow$predecessor = \textcolor{red}{NULL}\;
+  }{
+       successor = FindSuccessor(T, $p_{new}$)\;
+       \uIf{successor == \textcolor{red}{NULL}}{
+	  Insert($p_{new}$,T)\;
+	  $p_{new}\rightarrow$predecessor = FindMax()\;
+       }
+      \uElseIf{successor$\rightarrow$y $<$ $p_{new}\rightarrow$y}{
+	Insert($p_{new}$, T)\;
+ 	temp1 = successor$\rightarrow$predecessor\;
+ 	successor$\rightarrow$predecessor = $p_{new}$\;
+ 	\While {temp1 $<>$ \textcolor{red}{NULL} and temp1$\rightarrow$ y $<$ $p_{new}\rightarrow$y}{
+	  temp2 = temp1$\rightarrow$predecessor\;
+	  Points.add(temp1)\;
+ 	  Delete temp1\;
+ 	  temp1 = temp2\;
+ 	}
+ 	P$\rightarrow$predecessor = temp1\;
+      }
+      \uElse{
 	  \textcolor{blue}{//Ignore $p_{new}$.}\\
-	}
-     }
-    }
-}\makebox[2pt]{}\\
+      }
+    }\makebox[2pt]{}\\
+    return $T$\;
+}
+\} \makebox[2pt]{}\\
+ReportNonDominatedPoints(P)\{\\
+\Begin{
+    T = BuildNonDominatedPtsTree($P$)\;
+    Output $T \cup Points[ ]$\;
+}
 \}\\
-\caption{$\textbf{O(n log n)}$Algorithm to find Non Dominated Points in 3D plane.}
+\caption{$\textbf{O(n log n)}$Finding Non Dominated Points in 3D plane.}
 \end{algorithm}
+
 \newpage
 \section{A computational problem of experimental physicist}
 

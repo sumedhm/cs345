@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.1.9)  13 JAN 2014 03:22
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.1.9)  13 JAN 2014 23:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -270,6 +270,10 @@ Package color Info: Driver file: pdftex.def on input line 130.
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 \Gread@gobject=\count114
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip61
+)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -287,27 +291,27 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 \Gin@req@height=\dimen121
 \Gin@req@width=\dimen122
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 15.
+Package hyperref Info: Option `colorlinks' set `true' on input line 16.
 
 (./assignment1.aux)
 \openout1 = `assignment1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 \AtBeginShipoutBox=\box35
-Package hyperref Info: Link coloring ON on input line 16.
+Package hyperref Info: Link coloring ON on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -317,9 +321,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count115
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
-LaTeX Info: Redefining \nameref on input line 16.
+LaTeX Info: Redefining \ref on input line 17.
+LaTeX Info: Redefining \pageref on input line 17.
+LaTeX Info: Redefining \nameref on input line 17.
 
 (./assignment1.out) (./assignment1.out)
 \@outlinefile=\write3
@@ -364,131 +368,151 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.50 \newpage
+l.51 \newpage
               [1
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `math shift' on input line 53.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `math shift' on input line 53.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 63--64
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 71.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 72.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 71.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 72.
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--72
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 65--72
+Underfull \hbox (badness 10000) in paragraph at lines 66--73
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--72
+Underfull \hbox (badness 10000) in paragraph at lines 66--73
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--73
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 75--102
+Underfull \hbox (badness 10000) in paragraph at lines 76--103
 
  []
 
 [3] <p1.png, id=67, 265.74281pt x 272.51813pt>
 File: p1.png Graphic file (type png)
  <use p1.png>
-Package pdftex.def Info: p1.png used on input line 109.
+Package pdftex.def Info: p1.png used on input line 110.
 (pdftex.def)             Requested size: 170.71652pt x 175.07216pt.
- [4 <./p1.png>]
+
+Overfull \hbox (6.55122pt too wide) in paragraph at lines 119--129
+\OT1/cmr/m/n/12 As shown in fig-ure, the points in $\OML/cmm/m/it/12 P[]$ \OT1/
+cmr/m/n/12 can-not be dom-i-nated by any point in $\OML/cmm/m/it/12 P[]$\OT1/cm
+r/m/n/12 (according
+ []
+
+[4 <./p1.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 132.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 132.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--148
-
- []
-
-[5] [6]
-Overfull \hbox (9.6648pt too wide) in paragraph at lines 182--182
-[]$\OML/cmm/m/it/14.4 O\OT1/cmr/m/n/14.4 (\OML/cmm/m/it/14.4 ilogi\OT1/cmr/m/n/
-14.4 )$ \OT1/cmr/bx/n/14.4 al-go-rithm to main-tain non-dominated points
- []
+(hyperref)                removing `math shift' on input line 133.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 182.
+(hyperref)                removing `math shift' on input line 133.
 
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 182.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 184--188
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
-[7] [8] [9] <p11.png, id=116, 585.68813pt x 261.97874pt>
+
+Overfull \hbox (14.05394pt too wide) in paragraph at lines 136--139
+\OT1/cmr/m/n/12 find non-dominated points of $\OML/cmm/m/it/12 P[]$\OT1/cmr/m/n
+/12 , hence re-duc-ing the num-ber of points NonDominatedPts($\OML/cmm/m/it/12 
+P[]$\OT1/cmr/m/n/12 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--150
+
+ []
+
+[5] <p2.png, id=87, 265.74281pt x 272.51813pt>
+File: p2.png Graphic file (type png)
+ <use p2.png>
+Package pdftex.def Info: p2.png used on input line 156.
+(pdftex.def)             Requested size: 170.71652pt x 175.07216pt.
+ [6 <./p2.png>]
+[7]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 205.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 205.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--211
+
+ []
+
+[8] [9] [10] <p11.png, id=127, 585.68813pt x 261.97874pt>
 File: p11.png Graphic file (type png)
  <use p11.png>
-Package pdftex.def Info: p11.png used on input line 255.
+Package pdftex.def Info: p11.png used on input line 287.
 (pdftex.def)             Requested size: 284.52756pt x 127.27539pt.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
@@ -497,62 +521,70 @@ Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 
-<p12.png, id=117, 266.49562pt x 265.74281pt>
+<p12.png, id=128, 266.49562pt x 265.74281pt>
 File: p12.png Graphic file (type png)
  <use p12.png>
-Package pdftex.def Info: p12.png used on input line 265.
+Package pdftex.def Info: p12.png used on input line 297.
 (pdftex.def)             Requested size: 142.26378pt x 141.86485pt.
- [10 <./p11.png> <./p12.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 275--279
+ [11 <./p11.png> <./p12.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 307--311
 
  []
 
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-[11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 339--345
+[12] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 397--399
 
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 368--374
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 368--374
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 389--391
-
- []
-
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 399--428
+Underfull \hbox (badness 10000) in paragraph at lines 436--442
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 431.
 [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 431.
+Underfull \hbox (badness 10000) in paragraph at lines 465--471
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--471
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 486--488
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 496--525
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 528.
+[17]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 528.
  (./assignment1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 431.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 431.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 528.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 528.
 Package rerunfilecheck Info: File `assignment1.out' has not changed.
 (rerunfilecheck)             Checksum: 7C1E77598DD59EC066A705165A87628A;576.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 431.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 528.
  ) 
 Here is how much of TeX's memory you used:
- 6859 strings out of 495059
- 97313 string characters out of 3182031
- 206317 words of memory out of 3000000
- 9920 multiletter control sequences out of 15000+200000
+ 6894 strings out of 495059
+ 97815 string characters out of 3182031
+ 206442 words of memory out of 3000000
+ 9941 multiletter control sequences out of 15000+200000
  12111 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,21n,31p,235b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,19n,31p,240b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
@@ -565,10 +597,10 @@ sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
 >
-Output written on assignment1.pdf (16 pages, 197771 bytes).
+Output written on assignment1.pdf (18 pages, 207577 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
- 69 named destinations out of 1000 (max. 500000)
- 64 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 206 compressed objects within 3 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
