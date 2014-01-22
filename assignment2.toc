@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Multi-Swap in dynamic sequence}{2}{section.0.1}
+\contentsline {paragraph}{Overview}{2}{section*.2}
+\contentsline {subsection}{\numberline {1.1}Insert($D, i, x$)}{3}{subsection.0.1.1}
+\contentsline {paragraph}{}{3}{section*.3}
+\contentsline {paragraph}{}{3}{section*.4}
+\contentsline {paragraph}{Time Complexity:}{3}{section*.5}
+\contentsline {subsection}{\numberline {1.2}Delete($D, i$)}{5}{subsection.0.1.2}
+\contentsline {paragraph}{}{5}{section*.6}
+\contentsline {paragraph}{Time Complexity:}{5}{section*.7}
+\contentsline {subsection}{\numberline {1.3}Report($D, i$):}{7}{subsection.0.1.3}
+\contentsline {paragraph}{}{7}{section*.8}
+\contentsline {paragraph}{Time Complexity:}{7}{section*.9}
+\contentsline {subsection}{\numberline {1.4}MultiSwap($D, i, j$)}{9}{subsection.0.1.4}
+\contentsline {paragraph}{}{9}{section*.10}
+\contentsline {paragraph}{}{9}{section*.11}
+\contentsline {paragraph}{What needs to be done for MultiSwap($T, i, j$)?}{9}{section*.12}
+\contentsline {paragraph}{Time Complexity:}{10}{section*.13}
+\contentsline {section}{\numberline {2}Point of Maximum Overlap: A Model Solution}{11}{section.0.2}
+\contentsline {subsection}{\numberline {2.1}Fields stored in a node:}{11}{subsection.0.2.1}
+\contentsline {subsection}{\numberline {2.2}Brief Description:}{11}{subsection.0.2.2}
+\contentsline {subsection}{\numberline {2.3}Functions:}{11}{subsection.0.2.3}

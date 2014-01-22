@@ -1,6 +1,6 @@
 \documentclass[pdftex,a4paper,12pt]{report}
 
-\usepackage{algorithm2e}
+\usepackage[linesnumbered,boxruled,vlined]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{color}
@@ -97,9 +97,11 @@ right, and vice versa.\\\\
 Position of insertion will be found according to the size variable.\\
 Suppose, we are at a node $u$. Let s be the size of left subtree of $u$, and $i$ is the position where $x$ is to be 
 inserted. If $i\ \leq\ s+1$, then $x$ should be inserted in left subtree of $u$. Otherwise, if $i\ >\ s$, 
-then $x$ will be inserted in the right subtree of $u$.\\
+then $x$ will be inserted in the right subtree of $u$.
 
-\paragraph{Pseudo-Code:}
+\paragraph{Time Complexity:} \makebox[2pt]{}\\
+For any insertion, we will be traversing from root to leaf, thus taking $O(h)$ time. Hence, time complexity for this operation will
+be $O(log\ n)$.
 \begin{algorithm}
 Initialize flips$\gets$ 0;\makebox[40pt]{}\textcolor{blue}{//this variable flips is global, where flip(T) refers to
  flip \makebox[150pt]{} //bit of that node.}\\
@@ -158,7 +160,10 @@ The $i^{th}$ element will be found similarly with the help of the size variables
 	$O(log\ n)$.
 \end{itemize}
 
-\paragraph{Pseudo-Code:} \mbox{} \\
+\paragraph{Time Complexity:} \makebox[2pt]{}\\
+For any deletion, we will be traversing from root to leaf, thus taking $O(d)$ time, where $d$ is depth of tree. Then, Remove()
+which is normal deletion in a red-black tree has time complexity $O(log\ n)$. Hence, time complexity for this operation will
+be $O(log\ n)$.
 \begin{algorithm}
 Initialize flips$\gets$ 0;\makebox[40pt]{}\textcolor{blue}{//this variable flips is global, where flip(T) refers to
  flip \makebox[150pt]{}//bit of that node.}\\
@@ -201,7 +206,7 @@ Delete($T$, $i$)\{\\
       }
 }     
 \}\\
-\caption{Pseudo code for delete operation}
+\caption{Pseudo code for Delete operation}
 \end{algorithm}
 
 \newpage
@@ -212,7 +217,9 @@ If flip is 1, consider tree to be flipped. Else traverse normally.\\
 And for selecting the direction, check the size of left subtree. If size is smaller than $i$, go to 
 right subtree, else traverse left subtree.\\\\
 
-\paragraph{Pseudo-Code:} \mbox{} \\\\
+\paragraph{Time Complexity:} \makebox[2pt]{}\\
+For any report, we will be traversing from root to leaf, thus taking $O(h)$ time. Hence, time complexity for this operation will
+be $O(log\ n)$.
 \begin{algorithm}
 Initialize flips$\gets$ 0;\makebox[40pt]{}\textcolor{blue}{//this variable flips is global, where flip(T) refers to
  flip \makebox[150pt]{}//bit of that node.}\\
@@ -256,7 +263,7 @@ Report($T$, $i$)\{\\
 		}
 		return val($u$)\;
 \}\\
-\caption{Pseudo code for report operation}
+\caption{Pseudo code for Report operation}
 \end{algorithm}
 
 
@@ -269,8 +276,8 @@ Report($T$, $i$)\{\\
 The algorithm for MultiSwap() uses two other following operations as black boxes:
 \begin{enumerate}
 
-	\item \textbf{Merge($T_1$, $T_2$):} Given an element $x$, and two trees $T_1$ and $T_2$ having the same height h and the added 
-	constraint that all elements of $T_1$ are smaller than x, and all elements of $T_2$ are larger than x, merge these into 
+	\item \textbf{Merge($T_1$, $T_2$):} Given two trees $T_1$ and $T_2$ having the same height h, we can find an element x
+	and the added constraint that all elements of $T_1$ are smaller than x, and all elements of $T_2$ are larger than x, merge these into 
 	a single red-black tree. This operation can be done in $O(log\ n)$ time, as we have seen earlier in CS210 course.
 
 	\item \textbf{Split($T$, $x$):} This operation is just the opposite of Merge() described above. The aim is to split 
@@ -307,26 +314,26 @@ The algorithm for MultiSwap() uses two other following operations as black boxes
 \begin{algorithm}
 MultiSwap($D$, $i$, $j$)\{\\
 \Begin{
-	$x$ $\gets$ Report($T$, $i$)\;
-	$T_1$, $T'$ $\gets$ Split($T$, $x$)\;
-	$y$ $\gets$ Report($T'$, $j-i+1$)\;
-	$T_2$, $T_3$ $\gets$ Split($T'$, $y$)\;
+	$x$ $\gets$ Report($T$, $i$); \makebox[70pt]{}\textcolor{blue}{//$O(log\ n)$}\\
+	$T_1$, $T'$ $\gets$ Split($T$, $x$);	\makebox[60pt]{}\textcolor{blue}{//$O(log\ n)$}\\
+	$y$ $\gets$ Report($T'$, $j-i+1$);	\makebox[40pt]{}\textcolor{blue}{//$O(log\ n)$}\\
+	$T_2$, $T_3$ $\gets$ Split($T'$, $y$);\makebox[60pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	flip($T_2$) $\gets$ \textcolor{red}{not}(flip($T_2$));\makebox[40pt]{}\textcolor{blue}{//where not(0)=1, not(1)=0.}\\
-	$h_1$ $\gets$ Height($T_1$)\;
-	$h_2$ $\gets$ Height($T_2$)\;
-	$h_3$ $\gets$ Height($T_3$)\;
+	$h_1$ $\gets$ Height($T_1$);		\makebox[70pt]{}\textcolor{blue}{//$O(log\ n)$}\\
+	$h_2$ $\gets$ Height($T_2$);		\makebox[70pt]{}\textcolor{blue}{//$O(log\ n)$}\\
+	$h_3$ $\gets$ Height($T_3$);		\makebox[70pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	\eIf{$h_1 > h_2$}{
-		$T'\ \gets$ Merge($T_1,\ T_2$)\;
+		$T'\ \gets$ Merge($T_1,\ T_2$);	\makebox[40pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	}{
 		flip($T_1$) $\gets$ \textcolor{red}{not}(flip($T_2$))\;
-		$T'\ \gets$ Merge($T_1,\ T_2$)\;
+		$T'\ \gets$ Merge($T_1,\ T_2$);	\makebox[40pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	}
-	$h \ \gets$ Height($T'$);
+	$h \ \gets$ Height($T'$);			\makebox[70pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	\eIf{$h < h_3$}{
-		$T\ \gets$ Merge($T',\ T_3$)\;
+		$T\ \gets$ Merge($T',\ T_3$);		\makebox[40pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	}{
 		flip($T_3$) $\gets$ \textcolor{red}{not}(flip($T_3$))\;
-		$T\ \gets$ Merge($T',\ T_3$)\;
+		$T\ \gets$ Merge($T',\ T_3$);		\makebox[40pt]{}\textcolor{blue}{//$O(log\ n)$}\\
 	}
 	return $T$;
 }
@@ -335,16 +342,168 @@ MultiSwap($D$, $i$, $j$)\{\\
 \caption{Pseudo-code for MultiSwap operation}
 \end{algorithm}
 
-\newpage
-\section{Point of Maximum Overlap}
-
-\paragraph{Pseudo Code}\mbox{} \\
-\begin{algorithm}
-
-
-\caption{Pseudo Code for finding forces on particles}
-\end{algorithm}
-\\
 \paragraph{Time Complexity:} \makebox[2pt]{}\\
+As can be seen in the algorithm, all steps have maximum $O(log\ n)$, and each step is carried out only once. Thus, 
+time complexity of the operation is $O(log\ n)$.
+
+
+\newpage
+
+\section{Point of Maximum Overlap: A Model Solution}
+We are using an Augmented Red Black Tree.
+\subsection{Fields stored in a node:}
+  \begin{itemize}
+    \item \textbf{point}: x coordinate of the node.
+    \item \textbf{identifier}: +1 for a start point and -1 for an end point.
+    \item \textbf{overlapCount:} $\sum_{i\in{subtree\texttt{ } of\texttt{ } x\texttt{ }}}^{}(identifier(i))$ \\
+overlapCount(x) = overlapCount(left(x))+overlapCount(right(x))+identifier(x)
+    \item \textbf{max:} stores the maximum count of overlaps in the subtree of node.\\
+    max = $max_{\{j=1,2,3,...\}}\sum_{i=1}^{j}(identifier(i))$
+    \item \textbf{pointMax:} Point of maximum overlap in the subtree of x.  
+  \end{itemize}
+\subsection{Brief Description:}
+We are using Augmented Red Black Tree with fields mentioned above, to find the point of maximum overlap.
+For n intervals, the tree contains 2n nodes with the start point given the token 1 and end point is given -1.
+We do a line sweep from left to right and take the sum of these tokens from 1 to j for each endpoint.
+The point upto which this sum is maximum will be the point of maximum overlap. 
+\subsection{Functions:}
+  \begin{itemize}
+\item \textbf{Update:}
+  \begin{itemize}
+    \item Update is used to update the fields after insertion, deletion and rotation due to height balancing.
+    \item Assuming the augmented fields for children of a node(let it be x) has been calculated. Then the values in x will be:
+      \begin{enumerate}
+	\item overlapCount:
+	  overlapCount(x) = \\\makebox[100pt]{}overlapCount(left(x))+overlapCount(right(x))+identifier(x)
+	\item max:
+	\begin{align*}
+	      max(x) = max \begin{cases}
+			max(left(x)); \\\makebox[100pt]{}\textbf{if maximum is in the left sub tree}	\\
+		overlapCount(left(x)) + identifier(x);  \\\makebox[100pt]{}\textbf{if maximum is the point x}	\\
+	overlapCount(left(x)) + identifier(x) + max(right(x)); \\\makebox[100pt]{}\textbf{if maximum is in the right subtree}	\\
+		\end{cases}
+	\end{align*}
+	\item pointMax:
+	\begin{align*}
+	    pointMax(x) = \begin{cases}
+			pointMax(left(x)); \\\makebox[100pt]{} \textbf{if maximum is in the left sub tree}	\\
+		x; \texttt{	} \\\makebox[100pt]{}\textbf{if maximum is the point x}	\\
+	pointMax(right(x)); \\\makebox[100pt]{} \textbf{if maximum is in the right subtree}	\\
+		\end{cases}
+	 \end{align*}
+      \end{enumerate}
+    \item \underline{Time Complexity for Update:}\\
+In order to compute field values, only the values of children are needed. Therefore each call to update function takes only $O(1)$ time.
+  \end{itemize}
+
+  
+  \item \textbf{Insert:} 
+    \begin{itemize}
+      \item In order to insert an interval, insertion of start point is done before the end point of the interval.
+      \item A new node is inserted normally in the Red Black Tree T and after its insertion, the fields of the nodes lying on the path from the inserted node to the root are updated in a bottom-up fashion.
+   
+\begin{algorithm}
+\KwIn{A Pointer to a node of the tree,x coordinate of point,id to differentiate between start and end point}
+\If{T = NULL}{	
+$point(T) \gets x$\;
+$identifier(T) \gets id$\;
+$overlapCount(T) \gets id$\;
+$max(T) \gets 1$\;
+$left(T) \gets NULL$\;
+$right(T) \gets NULL$\;
+return $T$\;
+}
+\Else {	
+\If{$x \textless value(T)$}{	
+insert(left(T),x,id)\;
+}
+\ElseIf{$x \textgreater value(T)$}{ 
+Insert(right(T),x,id)\;
+}
+\ElseIf{id = 1}{
+insert(left(T),x,id)\;
+}
+\Else{
+insert(right(T),x,id)\;
+}
+Update(T)\;
+return $T$\;
+}
+\caption{insert($T,\ x,\ id$)}
+\end{algorithm}
+
+  \item \underline{Time Complexity for Insert:}	\\
+    For every interval, 2 insert operations are performed and for each point, traversal of RBT T takes $O(log\ n)$ time, where n is the number of intervals.
+    Every update operation takes $O(1)$ time. Therefore overall time complexity is $O(log\ n)$.
+  \end{itemize}
+  
+
+\item \textbf{Delete:}
+  \begin{itemize}
+    \item In order to delete an interval, the start point and end point are deleted separately.
+    \item While searching for the node to be deleted, we match its value as well as the id(+1 or -1).
+    \item The node is then swapped with its predecessor and then deleted.
+    \item After the deletion, fields of nodes that lie in the path from the node's and its predecessor’s parent to the root, are updated in bottom-up fashion.
+    \item \textbf{search(T,x,id):} It returns the node such that point(node) = x and identifier(x) = id.
+
+\begin{algorithm}
+\KwIn{The node to be deleted,id}
+$node \gets search(T,x,id)$\;
+\If{node is a Leaf Node}{	
+$u \gets (Node \rightarrow parent)$\;
+Delete node\;
+\While{u$\neq$ ROOT}
+{
+update(u)\;
+$u \gets (u \rightarrow parent)$\;
+}
+update(ROOT)
+}
+\Else{
+$u \gets (Node \rightarrow parent)$\;
+$temp \gets (Node \rightarrow predecessor)$\;
+$v \gets (temp \rightarrow parent)$\;
+swap(temp,Node)	\;
+Delete temp	\;
+\While{u$\neq$ ROOT}
+{
+update(u)\;
+$u \gets (u \rightarrow parent)$	\;
+}	
+\While{v$\neq$ ROOT}
+{
+update(v)\;
+$v \gets (v \rightarrow parent)$\;
+}	
+update(ROOT)\;
+}
+\caption{Delete(node,id)}
+\end{algorithm}
+
+  \item \underline{Time Complexity for Delete:}	\\
+  Deletion of an interval takes 2 Delete operations, one for each end point. Traversing in the RBT T 
+  to search for points takes $O(h)$ time where h is the height of T. Updating in Bottom-up fashion from the nodes take $O(d)$ 
+  time, where d is the depth of node. Therefore overall time complexity is $O(h)$ = $O(log\ n)$ where n is the number of intervals. 
+\end{itemize}
+
+\item \textbf{Height Balance Rotation:}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{fig1.png}
+\caption{Rotation}
+\label{fig1}
+\end{figure}
+\begin{itemize}
+\item During Rotation, only 2 nodes are affected and rest of the subtree's fields will remain the same as shown in figure-\ref{fig1}.To update their values, update function is called for the 2 nodes u and v. Hence it takes $O(1)$ time.
+\end{itemize}
+\item \textbf{MaxOverlap:}	
+\begin{itemize}
+\item At any node v, the Augmented field pointMax(v) stores the point with maximum overlap in the subtree of v. Therefore pointMax(ROOT) will give the point with maximum overlap in the entire interval tree.
+This can be achieved in $O(1)$ time.
+\end{itemize}
+
+\end{itemize}
+
 
 \end{document}

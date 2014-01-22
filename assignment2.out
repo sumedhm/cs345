@@ -1,0 +1,9 @@
+\BOOKMARK [1][-]{section.0.1}{Multi-Swap in dynamic sequence}{}% 1
+\BOOKMARK [2][-]{subsection.0.1.1}{Insert\(D, i, x\)}{section.0.1}% 2
+\BOOKMARK [2][-]{subsection.0.1.2}{Delete\(D, i\)}{section.0.1}% 3
+\BOOKMARK [2][-]{subsection.0.1.3}{Report\(D, i\):}{section.0.1}% 4
+\BOOKMARK [2][-]{subsection.0.1.4}{MultiSwap\(D, i, j\)}{section.0.1}% 5
+\BOOKMARK [1][-]{section.0.2}{Point of Maximum Overlap: A Model Solution}{}% 6
+\BOOKMARK [2][-]{subsection.0.2.1}{Fields stored in a node:}{section.0.2}% 7
+\BOOKMARK [2][-]{subsection.0.2.2}{Brief Description:}{section.0.2}% 8
+\BOOKMARK [2][-]{subsection.0.2.3}{Functions:}{section.0.2}% 9

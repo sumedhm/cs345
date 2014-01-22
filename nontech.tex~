@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+%\usepackage{gfsartemisia-euler}
+\usepackage[T1]{fontenc}
+
+\usepackage{alltt}
+\title{String Termination in C}
+
+\author{Sumedh Masulkar(11736)}
+\date{19 January, 2014}
+
+\begin{document}
+\maketitle
+ 
+\paragraph{}
+This was the first assignment on strings in ESC101 in C at IIT Kanpur. I had not been exposed before to programming, 
+and this was the first time I was dealing with strings. It was a simple assignment, I just had to read the string ``Hello'' 
+from stdin character by character, and print the string as it is. But it didn't turn out to be as simple as it appears. 
+It took me 15 minutes to find the bug in a program of 5 lines before I could submit the assignment. 
+\paragraph{}
+Let's see how this simple assignment frustrated me. The program which I wrote was as follows:
+\paragraph{Program:}
+\begin{alltt}
+#include <stdio.h>
+main()\{
+    char string[5];
+    int i=0;
+    for(i=0;i<5;i++) scanf("\%c", &string[i]);
+    printf("\%s", string);
+    printf("\textbackslash n");
+\}
+\end{alltt}
+
+\paragraph{}
+Pretty simple to understand and say it should have worked, isn't it? Let me simplify this for you, 
+the first line is for including a header file, after which I can use inbuilt functions of C. Then `main()' 
+just tells where to start the program from. Hence, all the commands within the braces after `main()' will be executed. 
+The first line within main() declares space for five characters(for ``Hello''). 
+A string is stored as an array(continuous collection of elements) of characters. `char string[5]' declares an array of size 5, 
+or space for 5 characters, which are indexed from 0 to 4. The second line similarly creates space for an integer which will 
+be represented by 'i'. `scanf(`\%c', string[i])' reads a character from the stdin, 
+and saves it into string[i], $i.e.$ $i^{th}$ position of the array. The third line iterates `i' from 0 to 4($<$5 means not including 5), 
+hence saving each character into string[0] to string [4]. Next line would just print the full string saved in the array named `string', 
+and the next line would just break the line and go to next.
+\paragraph{}
+Perfect$!$ Everything seems correct. I tried executing the program, but here comes the annoying part of the assignment. 
+I gave the input ``Hello'', but the program printed a strange character after ``Hello''. I tried executing the program again and again carefully so that I do not press any buttons mistakenly after `o'. But, surprisingly the output did not change. I tried looking at the program many times, tried to figure out where the problem was, but got no clue. After losing all my patience, I went to a friend who had prior experience in programming.\\
+And he told me an important concept of strings, that they go on if you not tell them where to stop by giving a string termination character - `\textbackslash0'. This means, to store ``Hello'' as an string, you don't only have to store ``Hello'', but ``Hello\textbackslash0''. It sounded as strange to me as it would to you. But, when I changed my program accordingly, it worked! I just had to change main as follows-
+
+\paragraph{}
+\begin{alltt}
+        char string[6];
+        int i=0;
+        for(i=0;i<5;i++) scanf("\%c", &string[i]);
+		string[5] = '0';
+        printf("\%s", string);
+        printf("\textbackslash n");
+\end{alltt}
+\paragraph{}
+This program gives space to six characters, the sixth being the terminating character. And in the fourth line, I save the terminating character in the sixth position of the string. And, then came the correct output to my relief - ``Hello''.
+
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+%\usepackage{gfsartemisia-euler}
+\usepackage[T1]{fontenc}
+
+\usepackage{alltt}
+\title{String Termination in C}
+
+\author{Sumedh Masulkar(11736)}
+\date{19 January, 2014}
+
+\begin{document}
+\maketitle
+ 
+\paragraph{}
+This was the first assignment on strings in ESC101 in C at IIT Kanpur. I had not been exposed before to programming, 
+and this was the first time I was dealing with strings. It was a simple assignment, I just had to read the string ``Hello'' 
+from stdin character by character, and print the string as it is. But it didn't turn out to be as simple as it appears. 
+It took me 15 minutes to find the bug in a program of 5 lines before I could submit the assignment. 
+\paragraph{}
+Let's see how this simple assignment frustrated me. The program which I wrote was as follows:
+\paragraph{Program:}
+\begin{alltt}
+#include <stdio.h>
+main()\{
+    char string[5];
+    int i=0;
+    for(i=0;i<5;i++) scanf("\%c", &string[i]);
+    printf("\%s", string);
+    printf("\textbackslash n");
+\}
+\end{alltt}
+
+\paragraph{}
+Pretty simple to understand and as you can see, I declared the string of 5 characters to save the string, 
+then scanned the string from terminal character by character using a for loop. Finally, I print the string contained in the array. 
+Should have worked, right? Everything seems correct. I tried executing the program, but it did not work.
+\paragraph{}
+I entered the input ``Hello'', but the program printed some garbage character after string ``Hello''. 
+I tried executing the program again and again carefully so that I do not press any buttons mistakenly after `o'. 
+But, surprisingly the output did not change. I tried looking at the program many times, tried to figure out where 
+the problem was, but got no clue. After losing all my patience, I went to a friend who had prior experience in programming.
+\paragraph{}
+He told me an important concept of strings, that you have to terminate them using string termination character - `\textbackslash 0'. 
+As soon as I changed my program accordingly, it worked! I just had to change main as follows-
+\paragraph{}
+\begin{alltt}
+        char string[6];
+        int i=0;
+        for(i=0;i<5;i++) scanf("\%c", &string[i]);
+        string[5] = `\textbackslash0';
+        printf("\%s", string);
+        printf("\textbackslash n");
+\end{alltt}
+
+\paragraph{}
+And, then this the correct output to the program - ``Hello''.
+\paragraph{}
+Such minor bugs may go unnoticed in your program and for beginners, waste a lot of time. 
+The only thing that helps is lot of practice. So, keep practising and program carefully to avoid such bugs.
+
+\end{document}
