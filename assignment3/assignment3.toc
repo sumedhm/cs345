@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}A Job Scheduling Problem}{2}{section.0.1}
+\contentsline {subsection}{\numberline {1.1}Strategy 1:}{2}{subsection.0.1.1}
+\contentsline {subsection}{\numberline {1.2}Strategy 2:}{3}{subsection.0.1.2}
+\contentsline {subsection}{\numberline {1.3}Strategy 3:}{3}{subsection.0.1.3}
+\contentsline {subsubsection}{Data Structure Used:}{3}{section*.2}
+\contentsline {subsubsection}{Brief description:}{4}{section*.3}
+\contentsline {subsection}{\numberline {1.4}Functions used:}{4}{subsection.0.1.4}
+\contentsline {subsection}{\numberline {1.5}Pseudo Code}{5}{subsection.0.1.5}
+\contentsline {subsection}{\numberline {1.6}Time Complexity}{5}{subsection.0.1.6}
+\contentsline {subsection}{\numberline {1.7}Proof Of Correctness}{6}{subsection.0.1.7}
+\contentsline {subsection}{\numberline {1.8}Space Complexity}{7}{subsection.0.1.8}
+\contentsline {section}{\numberline {2}Hierarchical Metric}{8}{section.0.2}
+\contentsline {subsection}{\numberline {2.1}Description}{8}{subsection.0.2.1}
+\contentsline {subsection}{\numberline {2.2}Approach}{8}{subsection.0.2.2}
+\contentsline {subsection}{\numberline {2.3}Pseudo Code}{9}{subsection.0.2.3}
+\contentsline {subsection}{\numberline {2.4}Time Complexity}{9}{subsection.0.2.4}
+\contentsline {subsection}{\numberline {2.5}Space Complexity}{9}{subsection.0.2.5}
+\contentsline {subsection}{\numberline {2.6}Proof of Correctness}{11}{subsection.0.2.6}
+\contentsline {subsubsection}{Lemma}{11}{section*.4}
+\contentsline {subsubsection}{Proof of Lemma}{11}{section*.5}
+\contentsline {subsubsection}{Proof of Correctness}{11}{section*.6}
