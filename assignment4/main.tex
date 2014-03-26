@@ -1,0 +1,384 @@
+\documentclass[pdftex,a4paper,12pt]{report}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+\def\therefore{
+\leavevmode
+\lower0.1ex\hbox{$\bullet$}
+\kern-0.2em\raise0.7ex\hbox{$\bullet$}
+\kern-0.2em\lower0.2ex\hbox{$\bullet$}
+\thinspace}
+\usepackage[linesnumbered,boxruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\newcommand{\abs}[1] {$\mid #1 \mid$}
+\renewcommand{\thesection}{\arabic{section}}
+
+\hypersetup{
+  colorlinks,
+  citecolor=blue,
+  linkcolor=blue,
+  urlcolor=blue
+}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+
+\textsc{\LARGE IIT Kanpur}\\[1.5cm]
+
+\textsc{\Large CS345A - AlgorithmsII}\\[0.5cm]
+
+% Title
+{ \huge \bfseries Assignment 4 \\[0.4cm] }
+
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Anjani Kumar\\
+11101
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+Sumedh Masulkar\\
+11736
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large March 11, 2014}
+
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Shortest path: An adventurous drive in Thar desert}
+\subsection{Problem}
+Given a graph $G$ containing nodes \{$s,d,junctions$\}, out of which some junctions are fuel-stations, Edges: the roads connecting the nodes, and the maximum capacity $c$ of the bike before it needs refilling. We need to find shortest feasible path from $s\ to\ d$, if it exists, otherwise notify that it does not exists. 
+\subsection{Brief Description:}
+The problem can be modelled using 2 graphs:\\
+$G(V,E)$: 
+\begin{itemize}
+\item The nodes V are junctions present in the desert.
+\item The edges E are the roads connecting those junctions.
+\end{itemize}
+$G_{f}(V_{f},E_{f})$:
+\begin{itemize}
+\item The nodes $V_{f}$ are the start, end, and the fuel stations.
+\item The edges $E_{f}$ are the \emph{feasible} roads connecting those junctions.
+\item Initially, $G_{f}$ contains no edges.
+\end{itemize}
+The algorithm returns the shortest feasible path between $s$ and $d$, if possible. Else, it returns no path.
+\\
+We are using \textbf{Dijkstra's} algorithm, multiple times to find the feasible path.
+\\\\
+Construction of $G_{f}$:
+\begin{itemize}
+\item insert $s$
+\item Begin Dijkstra's algorithm from $s$ in graph $G$ and insert the edges from $s$ to other nodes of $G_{f}$ accordingly.
+\item For all fuel stations in $G_{f}$, begin Dijkstra's algorithm from them in graph $G$, update the edges in $G_{f}$ according to minimum distance between nodes.
+\item Delete all the edges in $G_{f}$ whose weights are more than capacity of bike ($c$).
+\end{itemize}
+
+
+Functions used:
+\begin{itemize}
+\item Dijkstra's\_Mod($G_{f}$,$G$,$u$)
+\\
+Runs Dijkstra's algorithm from node $u$ in graph $G$ and update edges in graph $G_{f}$ accordingly.
+\item update($G$,$u$,$v$,$w$)
+\\
+In the input graph $G$, it inserts an edge between nodes $u$ and $v$ with weight $w$, if there was no edge previously. Otherwise, if $w\ <\ weight_{(u,v)}$ it updates the weight of edge ($u$,$v$) to $w$.
+\item Delete($G$,$c$)
+\\
+Deletes any edge in input graph $G$ whose weight is more than $c$.
+\item Pathfinder($T$,$u$,$v$)
+\\
+Returns the path from $u$ to $v$ in tree $T$ using BFS traversal, if it exists. Else it returns NULL. 
+\end{itemize}
+
+\subsection{Pseudo Code:}
+\begin{algorithm}
+        Tree $\gets$ Dijkstra's($G$,$u$)\\
+        \For{$\forall$ $v$ $\in$ $T$} {
+            \If{$v$ $\in$ \{$s,d,fuel-pump$\}}{
+                Insert($G_{f}$,$u$,$v$,$w$)
+            }
+        }
+        \caption{Pseudo-code for Dijkstra's\_Mod($G_{f}$,$G$,$u$)}
+\end{algorithm}
+
+\begin{algorithm}
+        Create a graph $G_{f}(V_{f},E_{f})$ with $V_{f}$ $\gets$ \{$s,d,fuel-stations$\}\\
+        $E_{f}$ $\gets$ NULL\\
+       Dijkstra's\_Mod($G_{f}$,$G$,$s$)\\
+       \For{$\forall$ u $\in$ $G_{f}$ - \{$s$\}}{
+        Dijkstra's\_Mod($G_{f}$,$G$,$u$)
+       }
+       Delete($G_{f},c$)\\
+       Path $\gets$ Dijkstra's($G_{f},s$)\\
+       $\Return$ Pathfinder($Path,s,d$)
+    \caption{Pseudo-code for Find\_Path($G,s,d,c$)}
+\end{algorithm}
+
+        
+\subsection{Proof Of Correctness}
+2 cases are possible for a given input G:
+\begin{itemize}
+\item Case 1: If there is no feasible path in $G$.
+\item Case 2: If $\exists$ a feasible path from $s$ to $d$ in $G$.
+\end{itemize}
+\textbf{Claim:} \emph{In case 1, there would be no path from $s$ to $d$ in graph $G_{f}$}.\\
+\textbf{Proof:} Case 1 can be further divided into 2 cases:
+\begin{itemize}
+\item Case 1A: There is no path from $s$ to $d$ in $G$.
+    \begin{itemize}
+    \item We are using the result of dijkstra's algorithm applied on graph $G$ to update edges in $G_{f}$. Hence, a path from $s$ to $d$ in $G_{f}$ in this case is not possible. 
+    \end{itemize}
+\item Case 1B: There is a path from $s$ to $d$ but it is not feasible.
+    \begin{itemize}
+    \item In this case, some edges in the path have weights $>$ $c$.
+    \item The Delete function used by the algorithm removes all the edges $E_{f}$ in $G_{f}$ such that $w_{G_f}$ $>$ $c$. Hence, there is no path in $G_{f}$ between $s$ and $d$.
+    \end{itemize}
+\end{itemize}
+\textbf{Claim:} \emph{In Case 2, There will always be a path from s to d in $G_{f}$}.\\
+\textbf{Proof:} Case 2 can be further divided into 2 cases:
+\begin{itemize}
+    \item Case 2A: The path requires no refilling.
+    \begin{itemize}
+    \item In this case, $\exists$ a path from $s\ to\ d$ with distance $\leq\ c$.
+    \item Since all the shortest edges in $G$ with $weight\ \leq\ c$ are kept in $G_{f}$, therefore $G_{f}$ will also contain that path.
+    \end{itemize}
+    \item Case 2B: The path requires refilling.
+    \begin{itemize}
+    \item In this case, the path has distance $>\ c$, and has edges with $weight\ \leq\ c$.
+    \item Using the \textbf{shortest sub-path} rule, if the given feasible path between $s$ and $d$ is the shortest, then all its edges will also have the minimum weight possible.
+    \item Since we are using \textbf{Dijkstra's} algorithm to build edges in $g_{f}$, at the end of the algorithm, all the edges in $G_{f}$ will be of minimum possible weight.
+    \item Hence the optimal path will also be present in $G_{f}$.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Time Complexity}
+\begin{itemize}
+\item \textbf{Update} take $O(1)$ time.
+\item \textbf{Dijkstra's\_Mod} takes $O(m log\ n)$ time.
+\item \textbf{Delete} takes $O(m)$ time.
+\item \textbf{Pathfinder} performs simple BFS traversal, hence it takes $O(m+n)$ time.
+\item \textbf{Dijkstra's\_Mod} is called fo evey node in $G_{f}$.
+\item Hence the total time taken T is:
+\begin{center}
+$T = c_{1}O(mlog\ n) + c_{2}nO(mlog\ n) + c_{3}O(m+n)$\\
+T = $O(mnlog\ n)$
+\end{center}
+
+\end{itemize}
+\newpage
+\section{Optimizing your time during exam days}
+\subsection{Brief description}
+\begin{itemize}
+\item In order to maximize the average, we need to maximize the sum of all the grades obtained in different courses.\\
+\item The problem can be solved using Dynamic Programming.\\
+\item The optimal solution for the grades would follow the given recursion:
+\begin{center}
+\label{eqn}
+$Opt(i,h)\ =\ max_{j\ \in\ 0\ to\ h}(f_{i}(j)\ +\ Opt(i-1,h-j))$
+\end{center}
+\item We are using 2 matrix: $grade$ and $max\_time$.
+%\begin{itemize}
+\item $grade[i][j]$ stores the optimum grade for $i$ courses that are given a total of $j$ hours.
+\item $max\_time[i][j]$ stores the hours required by the $i^{th}$ course when a total of $i$ courses are given $j$ hours.
+\item For a single course, $grade[1][h]$ is simply $f_1(h)$
+\item In case of finding optimal solution for multiple courses, the algorithm iteratively computes the $grade$ and $max\_time$ matrix using the formula in \ref{eqn}.
+\item The hours required for each course can be calculated using back tracking.
+\end{itemize}
+\subsection{Functions used}
+\begin{itemize}
+\item Optimize($n,H$)\\
+It computes the matrix $grade[i][j]$ and $max\_time[i][j]$.
+\item getHours($n,H$)\\
+It returns the amount of hours required for each course to achieve maximum grades using backtracking. Suppose the input is ($i,h$) Then the hours for course $i-1$ will be given by max\_time[$i-1$][$h - max\_time[i][h]$].\\
+\end{itemize}
+
+\newpage
+\subsection{Pseudo code}
+\begin{algorithm}
+        \For{$h \gets 0$ to $H$}{
+            grade[$1$][$h$] $\gets$ $f_{1}(h)$\\
+             max\_time[1][h] $\gets$ h\\
+            %$h++$
+        }
+        \For{$i \gets 2$ to $n$}{
+            \For{$h \gets 0$ to $H$}{
+                temp\_grade $\gets$ $0$\\
+                \For{$j \gets 0$ to $h$}{
+                    \If{($f_{i}(j)+grade[i-1][h-j]\ \geq\ temp\_grade$)}{
+                        temp\_j $\gets$ j\\
+                        $temp\_grade$ $\gets$ $f_{i}(j)+grade[i-1][h-j]$
+                    }
+                  %  $j++$
+                }
+                grade[i][h] $\gets$ temp\_grade\\
+                max\_time[i][h] $\gets$ temp\_j\\
+                %$h++$
+            }
+            %$i++$
+        }
+    \caption{Pseudo code for Optimize($n,H$)}
+\end{algorithm}
+
+\begin{algorithm}
+        $h$ $\gets$ $H$\\
+        \For{$i \gets n$ to $1$}{
+            $hour[i]$ $\gets$ max\_time[$i$][$h$]\\
+            $h$ $\gets$ $h$ - hour[i]\\
+            %$i--$
+        }
+    \caption{Pseudo code for getHours($n,H$)}
+\end{algorithm}
+
+\begin{algorithm}
+        Optimize($n,H$)\\
+        getHours($n,H$)
+    \caption{Pseudo code for main()}
+\end{algorithm}
+\subsection{Proof of Correctness}
+To Prove:\\
+\begin{center}
+$Opt(i,h)\ =\ max_{j\ \in\ 0\ to\ h}(f_{i}(j)\ +\ Opt(i-1,h-j))$
+\end{center}
+Where $Opt(i,h)\ is\ the\ optimal\ solution\ for\ i\ courses\ given\ a\ total\ of\ h\ hours$.\\
+\newpage
+\textbf{Proof by Induction}\\
+\begin{itemize}
+\item Base Case:\\
+In case of only 1 course, entire hours will be given to that course since $f_{i}(h)$ is non decreasing.
+\item Induction Hypothesis:\\
+Let us assume that the theorem is true for $i-1$ courses. Hence, for $\forall\ h\ \in H$, we know the optimal solution for $i-1$ courses.
+\item Induction step:\\
+For the $i^{th}$ course, the \textbf{Optimize} function takes the following sum for $\forall\ j\ \in h$:\\
+\begin{center}
+$f_{i}(j)\ +\ Opt(i-1,h-j)$
+\end{center}
+and keeps the maximum value among those $j$.\\
+This step is repeated for $\forall\ h\ \in H$, so using optimal solution for $(i-1)^{th}$ step, we have got optimal solution for $i^{th}$ step.
+\item Hence proved.
+\end{itemize}
+\subsection{Time Complexity}
+As can be seen from the pseudo code, it take $O(nH^2)$ to perform \textbf{Optimize} and it takes $O(n)$ time to perform \textbf{getHours}.\\
+Hence the overall time complexity is \textbf{$O(nH^2)$}.
+\subsection{Space Complexity}
+We are using 2 matrix of size $n$ x $H$. Therefore total space taken is $O(nH)$.
+\section{Dynamic Programming again}
+\subsection{problem}
+Given a set of graphs \{$G_0,G_1,...,G_b$\}, each containing $n$ nodes such that \{$s,t$\} $\in$ the vertices of all graphs.\\
+We have to find a polynomial time algorithm to find the sequence of paths $P_0,P_1,...,P_b$ of minimum cost given by:
+\begin{center}
+$cost(P_0,P_1,...,P_b)\ =\  \sum_{i=0}^{b}l(P_i)\ +\ k*changes(P_0,P_1,...,P_b) $
+\end{center}
+where, $l(P_i)$ is the number of edges in $P_i$\\
+and $changes(P_0,P_1,...,P_b)$ is the number of indices $i$ $(0\leq\ i\ \leq\ b-1)$ for which $P_i \neq P_{i+1}$ 
+\subsection{Brief Description}
+\begin{itemize}
+\item The problem is solved using Dynamic programming.
+\item Let G = \{$G_0,G_1,...,G_b$\} be a set of graphs with $n$ nodes in each graph.
+\item We define Intersect($i,j$) as:
+\begin{center}
+$Intersect(i,j)\ =\ \cap_{k=i}^{k=j}(G_{k}) \forall (0 \leq i \leq j \leq b)$
+\end{center}
+The graph $Intersect(i,j)$ obtained contains n nodes and the common edges in graphs $G_i,G_{i+1}...,G_j$. Each $Intersect(i,j)$ is given the following parameters:
+\begin{itemize}
+\item $shortest(i,j)$: It is the number of edges in the shortest path from $s$ to $t$ in $Intersect(i,j)$.
+\item $sPath(i,j)$: It is the shortest path from $s$ to $t$ in $Intersect(i,j)$.
+\end{itemize}
+\item Define $costMin(i)$ for a graph $G_i$ such that $costMin(i)$ stores the minimum of $cost(P_0,P_1,...,P_i)$ in the set of graphs \{$G_0,G_1,...,G_i$\}. The following recursion holds for $costMin(i)$:\\
+$costMin(i)$=
+\begin{center}
+$ min((i+1)*shortest(0,i),min_{j=0}^{j=i}(costMin(j)+(i-j)*shortest(j+1,i)+k))$
+\end{center}
+\item This computation can be done iteratively by incrementing i from ($0\ to\ b$) as $costMin(i)$ depends on $shortest(i,j)$ and \{$costMin(j)\ \forall\ 0\leq j \leq i$\}; both of which have already been computed beforehand.
+\item The algorithm maintains the sequence $(P_0,P_1,...)$ in the following manner:
+\begin{itemize}
+\item Suppose the $(i-1)^{th}$ sequence $(P_0,P_1,...,P_{i-1})$ is computed correctly.
+\item In the $i^{th}$ iteration, $costMin(i)$ comes out to be minimum for some  ($0\leq j \leq i$). In that case, the sequence $(P_{j+1},...,P_i)$ is updated to $sPath(j,i)$ and the rest of the sequence remains as it is.
+\end{itemize}
+\end{itemize}
+\subsection{Functions used}
+\begin{itemize}
+\item $pathfinder(G,s,t)$: It performs BFS traversal on graph \\
+$Intersect(i,j)$ = $\cap_{k=i}^{k=j}(G_{k}) \forall (0 \leq i \leq j \leq b)$ and returns the shortest path, and the length of that path in $Intersect(i,j)$.
+\end{itemize}
+\newpage
+\subsection{Pseudo code}
+\begin{algorithm}
+$pathfinder(G,shortest,sPath)$
+\For{$i \gets 0$ to $b$}{
+            $min \gets (i+1)*shortest(0,i)$\\
+            $pos \gets 0$\\
+            \For{$j \gets 0$ to $i-1$}{
+                \If{$min > costMin(j)+(i-j)*shortest(j+1,i)+k$}{
+                $min \gets costMin(j)+(i-j)*shortest(j+1,i)+k$\\
+                $pos \gets j+1$\\
+                }
+            }
+            $costMin(i) \gets min$\\
+            \For{$j \gets 0$ to $i$}{
+            \If{$j \leq pos-1$}{
+            $minPath[i][j] \gets minPath[pos-1][j]$\\
+            \Else{
+            $minPath[i][j] \gets sPath(pos,i)$\\
+            }
+            }
+            }
+        }
+\Return{minPath[b]} 
+\caption{Pseudo code for sequence(G,s,t,b,k)}
+\end{algorithm}
+
+
+\subsection{Proof of Correctness}
+To Prove:\\
+$costMin(i)$ = 
+\begin{center}
+$min((i+1)*shortest(0,i),min_{j=0}^{j=i}(costMin(j)+(i-j)*shortest(j+1,i)+k))$
+\end{center}
+Where $costMin(i)$ for a graph $G_i$ such that $costMin(i)$ stores the minimum of $cost(P_0,P_1,...,P_i)$ in the set of graphs \{$G_0,G_1,...,G_i$\}.\\
+\textbf{Proof by Induction}\\
+\begin{itemize}
+\item Base Case:\\
+In case of only 1 graph, shortest(0,0) will store the length of shortest path between s and t in G(0,0) , which is trivial to prove.
+\item Induction Hypothesis:\\
+Let us assume that the theorem is true for $i-1$ graphs.
+\item Induction step:\\
+After inserting $i^{th}$ graph, $\exists$ an optimal path sequences $(P_0,P_1,...P_i)$, such that $P_i = P_{i-1} = P_{i-2}......= P_{j+1} \neq P_{j}$, the cost for graphs $(G_0,G_1,....G_i)$ will be costMin(j) + (i-j)*shortest(j+1,i) + K(penalty for $P_{j+1} \neq P_{j}$). Therefore, finding all such possibilities $\forall j < i$, and taking minimum cost will give the optimal solution for $i$.
+\item Hence proved.
+\end{itemize}
+\subsection{Time complexity}
+\begin{itemize}
+\item $pathfinder(G,s,t)$: pathfinder computes $Intersect(i,j)$ $\forall (0 \leq i \leq j \leq b)$. $\exists\ O(b^2)$ pairs of $(i,j)$. For finding the intersection, atmost $b$ graphs are examined and each graph can have atmost $O(n^2)$ edges. Therefore each $(i,j)$ pair takes $O(bn^2)$ time, and for $O(b^2)$ pairs, time complexity would be $O(n^2b^3)$.
+\item $sequence(G,s,t,b,k)$: From the pseudo code, its time complexity is $T(pathfinder)+C*O(b^2)$. Hence the overall time complexity is $O(n^2b^3)$.
+\end{itemize}
+\end{document}
